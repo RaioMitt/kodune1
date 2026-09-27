@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minu CVI - Header ja Sidebar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        /* --- MUUTUJAD JA PÕHISTIILID --- */
+        :root {
+            --nav-w: 216px;       /* Küljemenüü laius */
+            --hdr-h: 58px;        /* Ülemise riba kõrgus */
+    /* --- PÕHIVÄRVIPALETT (Baas) --- */
+    /* Andmedisaini reegel: enamik teavet on mahedates/neutraalsetes toonides, 
+       heledaid ja tumedaid värve kasutatakse tähelepanu juhtimiseks. */
+    --primary: #E9822C; /* Sinu valitud oranž */
+    --secondary: #502B9F; /* Sinu valitud lilla */
+    --bg-light: #EAECEF; /* Hele neutraalne taust (nt lehe taust) */
+    --bg-mid: #EAECEF; /* Keskmine neutraalne taust (nt graafikute ruudustik/teljed) */
+    --text-main: #000000; /* Must põhitekst */
+    --text-muted: #000000; /* Must abitekst */
+    
+    /* --- KATEGOORILINE PALETT --- */
+    /* See palett on mõeldud graafikutel erinevate rühmade (nt kategooriliste andmete) võrdlemiseks. 
+       Reegel: värvid peavad olema üksteisest selgelt eristatavad. */
+    --cat-1: #E9822C; /* Sinu oranž */
+    --cat-2: #502B9F; /* Sinu lilla */
+    --cat-3: #20C997; /* Täiendav harmooniline värv: sinakasroheline/münt */
+    --cat-4: #F4C145; /* Täiendav harmooniline värv: soe kollane */
+    --cat-5: #D63384; /* Täiendav harmooniline värv: roosakas-punane */
+    
+    /* --- PIDEV PALETT (Oranži baasil) --- */
+    /* See palett näitab väärtuste kasvu (ühe tooni intensiivsuse muutus).
+       Madalad väärtused on kahvatud, kõrged väärtused tumedad ja erksad. */
+    --cont-10: #FDF3EA; /* Väga madal väärtus (0-10%) */
+    --cont-30: #F8D8BB;
+    --cont-50: #F3BD8D;
+    --cont-70: #EEA25E;
+    --cont-90: #E9822C; /* Kõrge väärtus (sinu oranž) */
+    --cont-100: #B7601A; /* Väga kõrge / fookuspunkt */
+    
+    /* --- LAHKNEV PALETT (Diverging) --- */
+    /* Kui andmed liiguvad miinusest plussi (nt -100 kuni +100), 
+       kasutatakse kahte vastandlikku värvi ja heledat keskpunkti. */
+    --div-min: #502B9F; /* Miinusväärtused (Lilla) */
+    --div-min-light: #C0ACF1; 
+    --div-mid: #F8F9FA; /* Neutraalne keskpunkt (0) */
+    --div-max-light: #F8D8BB; 
+    --div-max: #E9822C; /* Plussväärtused (Oranž) */  /* Headeri taust */
+        }
+        
+        /* Kasuta põhivärvipaletti teksti ja taustade jaoks */
+    body {
+        background-color: var(--bg-light);
+        color: var(--text-main);
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    h1 {
+        color: var(--secondary); /* Teeb H1 pealkirjad sinu lillaks */
+    }
+
+    h2 {
+        color: var(--primary);
+    }
+
+    /* Kasuta kategoorilist paletti näiteks graafiku tulpade või legendi puhul */
+    .bar-grupp-1 { background-color: var(--cat-1); }
+    .bar-grupp-2 { background-color: var(--cat-2); }
+        /* --- ÜLEMINE RIBA (HEADER) --- */
+        .hdr {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0;
+            height: var(--hdr-h);
+            background: var(--text-main);
+            display: flex; 
+            align-items: center;
+            padding: 0 28px; 
+            gap: 16px;
+            z-index: 100; /* Hoiab headeri teiste elementide peal */
+        }
+
+        .hdr-pip { 
+            width: 7px; 
+            height: 7px; 
+            border-radius: 50%; 
+            background: var(--primary); 
+        }
+
+        .hdr-title { 
+            font-size: 15px; 
+            font-weight: 600; 
+            color: #fff; 
+        }
+
+        .hdr-sep { 
+            width: 1px; 
+            height: 18px; 
+            background: rgba(255, 255, 255, .15); 
+        }
+
+        .hdr-sub { 
+            font-size: 12px; 
+            color: rgba(255, 255, 255, .4); 
+            letter-spacing: .04em; 
+            text-transform: uppercase;
+        }
+
+        /* --- KÜLJEMENÜÜ (SIDEBAR) STIILID --- */
+        .sidebar {
+            position: fixed; 
+            top: var(--hdr-h); /* Alustab sealt, kus header lõppeb */
+            left: 0; 
+            bottom: 0;
+            width: var(--nav-w);
+            background: var(--surface); 
+            border-right: 1px solid #E2E2DE;
+            padding: 20px 0 40px; 
+            overflow-y: auto;
+            z-index: 90;
+        }
+        
+        .nav-group { 
+            font-size: 12px; 
+            letter-spacing: .12em; 
+            text-transform: uppercase; 
+            color: #000000; 
+            padding: 0 18px; 
+            margin: 20px 0 10px; 
+            font-weight: bold;
+        }
+        
+        .nav-item {
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            padding: 10px 18px; 
+            font-size: 16px; 
+            color: var(--ink-muted);
+            cursor: pointer; 
+            border-left: 3px solid transparent;
+            transition: all .1s; 
+            user-select: none;
+        }
+        
+        .nav-item:hover { 
+            background: #F7F7F5; 
+            color: var(--ink); 
+        }
+        
+        .nav-item.active { 
+            color: var(--ds1); 
+            border-left-color: var(--ds1); 
+            background: rgba(0, 95, 200, .05); 
+            font-weight: bold; 
+        }
+
+        .nav-item svg { width: 16px; height: 16px; opacity: .45; flex-shrink: 0; }
+        .nav-item.active svg { opacity: 1; }
+
+        /* --- SISUALA STIILID --- */
+        .content { 
+            margin-left: var(--nav-w); 
+            margin-top: var(--hdr-h); /* Jätab menüüle ja headerile ruumi */
+            padding: 40px; 
+        }
+        
+        .panel { 
+            display: none; 
+            max-width: 900px;
+        }
+        
+        .panel.active { 
+            display: block; 
+        }
+
+        .panel-title {
+            margin-bottom: 30px;
+        }
+
+        .color-section {
+            margin-top: 30px;
+        }
+
+        .color-section:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .section-label::after {
+            height: 1px;
+            flex: 1;
+            background: var(--bg-mid);
+            content: '';
+        }
+
+        .color-card {
+            padding: 20px;
+            border: 1px solid #E2E2DE;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 18px;
+        }
+
+        .color-name {
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .color-swatch {
+            display: flex;
+            min-height: 38px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 0 10px;
+            border-radius: 2px;
+            font-family: Consolas, monospace;
+            font-size: 12px;
+        }
+
+        .color-swatch.light-text {
+            color: #fff;
+        }
+
+        .color-swatch.dark-text {
+            color: var(--text-main);
+        }
+
+        .color-hex {
+            opacity: .75;
+        }
+
+        .type-rows {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 125px minmax(0, 1fr) 175px;
+            align-items: center;
+            gap: 18px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--bg-mid);
+        }
+
+        .type-row:last-child {
+            border-bottom: 0;
+        }
+
+        .type-role,
+        .type-spec {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .type-role {
+            text-transform: uppercase;
+        }
+
+        .type-spec {
+            text-align: right;
+        }
+
+        .type-sample-h1 {
+            color: var(--secondary);
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .type-sample-h2 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .type-sample-body {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .type-sample-chart-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .type-sample-subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .type-sample-axis {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .type-sample-axis-label {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .type-sample-axis-ticks {
+            color: var(--text-muted);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+        }
+
+        @media (max-width: 680px) {
+            .content {
+                padding: 28px 20px;
+            }
+
+            .type-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .type-spec {
+                text-align: left;
+            }
+        }
+
+        .div-strip {
+            height: 40px;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            background: linear-gradient(to right, var(--div-min), var(--div-min-light), var(--div-mid), var(--div-max-light), var(--div-max));
+        }
+
+        .cont-strip {
+            height: 40px;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            background: linear-gradient(to right, var(--cont-10), var(--cont-30), var(--cont-50), var(--cont-70), var(--cont-90), var(--cont-100));
+        }
+
+        .div-ticks,
+        .div-labels,
+        .cont-ticks,
+        .cont-labels {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            font-family: Consolas, monospace;
+        }
+
+        .div-ticks {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .cont-ticks {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .div-ticks .center-tick {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .div-labels {
+            margin-top: 5px;
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        .cont-labels {
+            margin-top: 5px;
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        .div-labels span:nth-child(2) {
+            text-align: center;
+        }
+
+        .div-labels span:last-child {
+            text-align: right;
+        }
+
+        .image-draft {
+            margin: 0;
+            padding: 12px;
+            border: 1px solid #E2E2DE;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .image-draft img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .image-description {
+            max-width: 720px;
+            margin-top: 24px;
+        }
+
+        .image-description p {
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÜLEMINE RIBA (HEADER) -->
+    <header class="hdr">
+        <div class="hdr-pip"></div>
+        <div class="hdr-title">Andmedisaini CVI</div>
+        <div class="hdr-sep"></div>
+        <div class="hdr-sub">RAIO MITT</div>
+        
+    </header>
+
+    <!-- KÜLJEMENÜÜ (SIDEBAR) -->
+    <nav class="sidebar">
+        <div class="nav-group">Disain</div>
+        
+        <div class="nav-item active" data-panel="colors">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="5" cy="5" r="2.5"/><circle cx="11" cy="5" r="2.5"/><circle cx="8" cy="11" r="2.5"/>
+            </svg>
+            Värvid
+        </div>
+        
+        <div class="nav-item" data-panel="typography">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 4h12M8 4v8M5 12h6"/>
+            </svg>
+            Tüpograafia
+        </div>
+
+        <div class="nav-item" data-panel="charts">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="9" width="3" height="5"/><rect x="6.5" y="5" width="3" height="9"/><rect x="11" y="2" width="3" height="12"/>
+            </svg>
+            Graafikud
+        </div>
+
+        <div class="nav-item" data-panel="textonimage">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 6h6M5 9h4"/>
+            </svg>
+            Tekst pildil
+        </div>
+        
+        <!-- Lisa siia menüüpunkte juurde (Tekst fotol, Protsessiskeem jne) -->
+    </nav>
+
+    <!-- PÕHISISU ALA -->
+    <main class="content">
+        <!-- Paneel: Värvid (aktiivne laadimisel) -->
+        <div class="panel active" id="panel-colors">
+            <h1 class="panel-title">Värvid</h1>
+
+            <section class="color-section">
+                <h2 class="section-label">Põhivärvid</h2>
+                <div class="color-card color-grid">
+                    <div><div class="color-name">Põhitoon · oranž</div><div class="color-swatch dark-text" style="background:var(--primary);"><span>Primary</span><span class="color-hex">#E9822C</span></div></div>
+                    <div><div class="color-name">Põhitoon · lilla</div><div class="color-swatch light-text" style="background:var(--secondary);"><span>Secondary</span><span class="color-hex">#502B9F</span></div></div>
+                    <div><div class="color-name">Hele taust</div><div class="color-swatch dark-text" style="background:var(--bg-light);"><span>Background light</span><span class="color-hex">#F8F9FA</span></div></div>
+                    <div><div class="color-name">Keskmine taust</div><div class="color-swatch dark-text" style="background:var(--bg-mid);"><span>Background mid</span><span class="color-hex">#EAECEF</span></div></div>
+                    <div><div class="color-name">Põhitekst</div><div class="color-swatch light-text" style="background:var(--text-main);"><span>Text main</span><span class="color-hex">#212529</span></div></div>
+                    <div><div class="color-name">Abitekst</div><div class="color-swatch light-text" style="background:var(--text-muted);"><span>Text muted</span><span class="color-hex">#6C757D</span></div></div>
+                </div>
+            </section>
+
+            <section class="color-section">
+                <h2 class="section-label">Kategooriline palett</h2>
+                <div class="color-card color-grid">
+                    <div><div class="color-name">Kategooria 1</div><div class="color-swatch dark-text" style="background:var(--cat-3);"><span>Cat 1</span><span class="color-hex">#20C997</span></div></div>
+                    <div><div class="color-name">Kategooria 2</div><div class="color-swatch dark-text" style="background:var(--cat-4);"><span>Cat 2</span><span class="color-hex">#F4C145</span></div></div>
+                    <div><div class="color-name">Kategooria 3</div><div class="color-swatch light-text" style="background:var(--cat-5);"><span>Cat 3</span><span class="color-hex">#D63384</span></div></div>
+                    <div><div class="color-name">Kategooria 4</div><div class="color-swatch light-text" style="background:var(--cat-2);"><span>Cat 4</span><span class="color-hex">#502B9F</span></div></div>
+                </div>
+            </section>
+
+            <section class="color-section">
+                <h2 class="section-label">Pidev palett · oranž</h2>
+                <div class="color-card">
+                    <div class="cont-strip"></div>
+                    <div class="cont-ticks">
+                        <span>10%</span><span>30%</span><span>50%</span><span>70%</span><span>90%</span><span>100%</span>
+                    </div>
+                    <div class="cont-labels">
+                        <span>Madal väärtus</span><span>Kõrge väärtus</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="color-section">
+                <h2 class="section-label">Lahknev palett</h2>
+                <div class="color-card">
+                    <div class="div-strip"></div>
+                    <div class="div-ticks">
+                        <span>≤ −100</span><span>−50</span><span>−25</span><span class="center-tick">0</span><span>+25</span><span>+50</span><span>≥ +100</span>
+                    </div>
+                    <div class="div-labels">
+                        <span>Miinusväärtused</span><span>Neutraalne</span><span>Plussväärtused</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Paneel: Tüpograafia -->
+        <div class="panel" id="panel-typography">
+            <h1 class="panel-title">Tüpograafia</h1>
+
+            <section class="color-section">
+                <h2 class="section-label">Kirjasuurused ja stiilid</h2>
+                <div class="color-card">
+                    <div class="type-rows">
+                        <div class="type-row">
+                            <div class="type-role">Pealkiri 1</div>
+                            <div class="type-sample-h1">Kus andmed erinevad?</div>
+                            <div class="type-spec">Playfair Display · 600 · 32px</div>
+                        </div>
+                        <div class="type-row">
+                            <div class="type-role">Pealkiri 2</div>
+                            <div class="type-sample-h2">Haiguste levimus vanuse järgi</div>
+                            <div class="type-spec">Playfair Display · 600 · 24px</div>
+                        </div>
+                        <div class="type-row">
+                            <div class="type-role">Sisutekst</div>
+                            <div class="type-sample-body">Graafik näitab, kuidas väärtused vanuserühmade lõikes muutuvad. Heledamad toonid tähistavad väiksemaid väärtusi.</div>
+                            <div class="type-spec">Playfair Display · 400 · 16px</div>
+                        </div>
+                        <div class="type-row">
+                            <div class="type-role">Graafiku pealkiri</div>
+                            <div class="type-sample-chart-title">Haiguste levimussuhe vanuserühma järgi</div>
+                            <div class="type-spec">Playfair Display · 600 · 18px</div>
+                        </div>
+                        <div class="type-row">
+                            <div class="type-role">Alapealkiri</div>
+                            <div class="type-sample-subtitle">Keskmine väärtus · võrdlus rühmade vahel</div>
+                            <div class="type-spec">Playfair Display · 400 · 14px</div>
+                        </div>
+                        <div class="type-row">
+                            <div class="type-role">Teljemärgised</div>
+                            <div class="type-sample-axis">
+                                <div class="type-sample-axis-label">Väärtus</div>
+                                <div class="type-sample-axis-ticks">0 · 25 · 50 · 75 · 100</div>
+                            </div>
+                            <div class="type-spec">Sans 13px · Mono 12px</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Paneel: Tekst pildil -->
+        <div class="panel" id="panel-textonimage">
+            <h1 class="panel-title">Tekst pildil</h1>
+            <figure class="image-draft">
+                <img src="buss_mustand.png" alt="Bussi ja teksti kujunduse mustand">
+            </figure>
+            <section class="image-description">
+                <h2 class="section-label">Minu kujundusvalik</h2>
+                <p>Valisin selle toreda pildi Tartu linnaliini bussist ja kuna meenus, et hiljuti oli autovaba päev, tundus see pilt siia sobivat. Lisaks oli pildil ka vaba ruumi kuhu teksti paigutada. Teksti püüdsin paigutada nii, et see jäeks võimalikult loetav. Soovisin kasutada pildil oma CVI põhivärve, kui alumine oranz tekst ei tahtnud kuidagi nähtav jääda.
+                    Seega kasutasin oranzi värvi heledamat tooni, et tekst oleks paremini nähtav (#fdf3ea). Peamisel tekstil kasutasin oma CVI põhivärvi, lillat (#502b9f). Teksti fontiks jäi Playfair Display.
+                </p>
+            </section>
+        </div>
+
+        <!-- Paneel: Graafikud -->
+        <div class="panel" id="panel-charts">
+            <h1 class="panel-title">Andmegraafikud</h1>
+            <figure class="image-draft">
+                <img src="Graafik1.png" alt="Andmegraafiku näidis">
+            </figure>
+            <figure class="image-draft">
+                <img src="graafik2.png" alt="Teise andmegraafiku näidis">
+            </figure>
+        </div>
+        
+        <!-- Lisa siia sisuplokke juurde vastavalt menüüle -->
+    </main>
+
+    <!-- JAVASCRIPT MENÜÜ TÖÖTAMISEKS -->
+    <script>
+        const items = document.querySelectorAll('.nav-item[data-panel]');
+        const panels = document.querySelectorAll('.panel');
+
+        function showPanel(id) {
+            panels.forEach(panel => panel.classList.remove('active'));
+            items.forEach(item => item.classList.remove('active'));
+
+            const activePanel = document.getElementById('panel-' + id);
+            if(activePanel) activePanel.classList.add('active');
+
+            const activeNav = document.querySelector('.nav-item[data-panel="' + id + '"]');
+            if(activeNav) activeNav.classList.add('active');
+        }
+
+        items.forEach(item => {
+            item.addEventListener('click', () => showPanel(item.dataset.panel));
+        });
+    </script>
+</body>
+</html>
