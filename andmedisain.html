@@ -3,75 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minu CVI - Header ja Sidebar</title>
+    <title>Minu CVI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-        /* --- MUUTUJAD JA PÕHISTIILID --- */
         :root {
-            --nav-w: 216px;       /* Küljemenüü laius */
-            --hdr-h: 58px;        /* Ülemise riba kõrgus */
-    /* --- PÕHIVÄRVIPALETT (Baas) --- */
-    /* Andmedisaini reegel: enamik teavet on mahedates/neutraalsetes toonides, 
-       heledaid ja tumedaid värve kasutatakse tähelepanu juhtimiseks. */
-    --primary: #E9822C; /* Sinu valitud oranž */
-    --secondary: #502B9F; /* Sinu valitud lilla */
-    --bg-light: #EAECEF; /* Hele neutraalne taust (nt lehe taust) */
-    --bg-mid: #EAECEF; /* Keskmine neutraalne taust (nt graafikute ruudustik/teljed) */
-    --text-main: #000000; /* Must põhitekst */
-    --text-muted: #000000; /* Must abitekst */
-    
-    /* --- KATEGOORILINE PALETT --- */
-    /* See palett on mõeldud graafikutel erinevate rühmade (nt kategooriliste andmete) võrdlemiseks. 
-       Reegel: värvid peavad olema üksteisest selgelt eristatavad. */
-    --cat-1: #E9822C; /* Sinu oranž */
-    --cat-2: #502B9F; /* Sinu lilla */
-    --cat-3: #20C997; /* Täiendav harmooniline värv: sinakasroheline/münt */
-    --cat-4: #F4C145; /* Täiendav harmooniline värv: soe kollane */
-    --cat-5: #D63384; /* Täiendav harmooniline värv: roosakas-punane */
-    
-    /* --- PIDEV PALETT (Oranži baasil) --- */
-    /* See palett näitab väärtuste kasvu (ühe tooni intensiivsuse muutus).
-       Madalad väärtused on kahvatud, kõrged väärtused tumedad ja erksad. */
-    --cont-10: #FDF3EA; /* Väga madal väärtus (0-10%) */
-    --cont-30: #F8D8BB;
-    --cont-50: #F3BD8D;
-    --cont-70: #EEA25E;
-    --cont-90: #E9822C; /* Kõrge väärtus (sinu oranž) */
-    --cont-100: #B7601A; /* Väga kõrge / fookuspunkt */
-    
-    /* --- LAHKNEV PALETT (Diverging) --- */
-    /* Kui andmed liiguvad miinusest plussi (nt -100 kuni +100), 
-       kasutatakse kahte vastandlikku värvi ja heledat keskpunkti. */
-    --div-min: #502B9F; /* Miinusväärtused (Lilla) */
-    --div-min-light: #C0ACF1; 
-    --div-mid: #F8F9FA; /* Neutraalne keskpunkt (0) */
-    --div-max-light: #F8D8BB; 
-    --div-max: #E9822C; /* Plussväärtused (Oranž) */  /* Headeri taust */
+            --nav-w: 216px;
+            --hdr-h: 58px;
+            --primary: #E9822C;
+            --secondary: #502B9F;
+            --bg-light: #EAECEF;
+            --text-main: #000000;
+            
+            --cat-1: #E9822C;
+            --cat-2: #502B9F;
+            --cat-3: #38b6ff;
+            --cat-4: #737373;
+            --cat-5: #8c52ff;
+            
+            --cont-10: #FDF3EA;
+            --cont-30: #F8D8BB;
+            --cont-50: #F3BD8D;
+            --cont-70: #EEA25E;
+            --cont-90: #E9822C;
+            --cont-100: #B7601A;
+            
+            --div-min: #502B9F;
+            --div-min-light: #C0ACF1; 
+            --div-mid: #F8F9FA;
+            --div-max-light: #F8D8BB; 
+            --div-max: #E9822C;
         }
         
-        /* Kasuta põhivärvipaletti teksti ja taustade jaoks */
-    body {
-        background-color: var(--bg-light);
-        color: var(--text-main);
-        font-family: 'Playfair Display', serif;
-        font-size: 16px;
-        line-height: 1.5;
-    }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
 
-    h1 {
-        color: var(--secondary); /* Teeb H1 pealkirjad sinu lillaks */
-    }
+        h1 {
+            color: var(--secondary);
+        }
 
-    h2 {
-        color: var(--primary);
-    }
+        h2 {
+            color: var(--primary);
+        }
 
-    /* Kasuta kategoorilist paletti näiteks graafiku tulpade või legendi puhul */
-    .bar-grupp-1 { background-color: var(--cat-1); }
-    .bar-grupp-2 { background-color: var(--cat-2); }
-        /* --- ÜLEMINE RIBA (HEADER) --- */
+        .bar-grupp-1 { background-color: var(--cat-1); }
+        .bar-grupp-2 { background-color: var(--cat-2); }
+        
         .hdr {
             position: fixed; 
             top: 0; 
@@ -83,7 +67,7 @@
             align-items: center;
             padding: 0 28px; 
             gap: 16px;
-            z-index: 100; /* Hoiab headeri teiste elementide peal */
+            z-index: 100;
         }
 
         .hdr-pip { 
@@ -97,6 +81,7 @@
             font-size: 15px; 
             font-weight: 600; 
             color: #fff; 
+            font-family: 'Montserrat', sans-serif;
         }
 
         .hdr-sep { 
@@ -110,20 +95,21 @@
             color: rgba(255, 255, 255, .4); 
             letter-spacing: .04em; 
             text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* --- KÜLJEMENÜÜ (SIDEBAR) STIILID --- */
         .sidebar {
             position: fixed; 
-            top: var(--hdr-h); /* Alustab sealt, kus header lõppeb */
+            top: var(--hdr-h);
             left: 0; 
             bottom: 0;
             width: var(--nav-w);
-            background: var(--surface); 
+            background: #FFFFFF; 
             border-right: 1px solid #E2E2DE;
             padding: 20px 0 40px; 
             overflow-y: auto;
             z-index: 90;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .nav-group { 
@@ -142,7 +128,7 @@
             gap: 10px;
             padding: 10px 18px; 
             font-size: 16px; 
-            color: var(--ink-muted);
+            color: var(--text-main);
             cursor: pointer; 
             border-left: 3px solid transparent;
             transition: all .1s; 
@@ -151,23 +137,22 @@
         
         .nav-item:hover { 
             background: #F7F7F5; 
-            color: var(--ink); 
+            color: var(--text-main); 
         }
         
         .nav-item.active { 
-            color: var(--ds1); 
-            border-left-color: var(--ds1); 
-            background: rgba(0, 95, 200, .05); 
+            color: var(--primary); 
+            border-left-color: var(--primary); 
+            background: rgba(233, 130, 44, .05); 
             font-weight: bold; 
         }
 
         .nav-item svg { width: 16px; height: 16px; opacity: .45; flex-shrink: 0; }
         .nav-item.active svg { opacity: 1; }
 
-        /* --- SISUALA STIILID --- */
         .content { 
             margin-left: var(--nav-w); 
-            margin-top: var(--hdr-h); /* Jätab menüüle ja headerile ruumi */
+            margin-top: var(--hdr-h);
             padding: 40px; 
         }
         
@@ -202,12 +187,13 @@
             font-weight: 600;
             letter-spacing: .1em;
             text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .section-label::after {
             height: 1px;
             flex: 1;
-            background: var(--bg-mid);
+            background: #E2E2DE;
             content: '';
         }
 
@@ -226,10 +212,11 @@
 
         .color-name {
             margin-bottom: 6px;
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .color-swatch {
@@ -267,7 +254,7 @@
             align-items: center;
             gap: 18px;
             padding: 15px 0;
-            border-bottom: 1px solid var(--bg-mid);
+            border-bottom: 1px solid #E2E2DE;
         }
 
         .type-row:last-child {
@@ -278,7 +265,7 @@
         .type-spec {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--text-main);
         }
 
         .type-role {
@@ -304,7 +291,7 @@
         }
 
         .type-sample-body {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 16px;
             line-height: 1.7;
         }
@@ -315,7 +302,7 @@
         }
 
         .type-sample-subtitle {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 14px;
             font-weight: 400;
         }
@@ -327,13 +314,14 @@
         }
 
         .type-sample-axis-label {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 13px;
             font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .type-sample-axis-ticks {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-family: 'IBM Plex Mono', monospace;
             font-size: 12px;
         }
@@ -378,12 +366,12 @@
         }
 
         .div-ticks {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 12px;
         }
 
         .cont-ticks {
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 12px;
         }
 
@@ -394,14 +382,16 @@
 
         .div-labels {
             margin-top: 5px;
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 11px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .cont-labels {
             margin-top: 5px;
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 11px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .div-labels span:nth-child(2) {
@@ -428,6 +418,12 @@
             object-fit: contain;
             object-position: center;
         }
+        
+        .image-draft.img-large img {
+            max-height: none;
+            min-width: 2000px;
+            width: 100%;
+        }
 
         .image-description {
             max-width: 720px;
@@ -441,7 +437,6 @@
 </head>
 <body>
 
-    <!-- ÜLEMINE RIBA (HEADER) -->
     <header class="hdr">
         <div class="hdr-pip"></div>
         <div class="hdr-title">Andmedisaini CVI</div>
@@ -450,11 +445,18 @@
         
     </header>
 
-    <!-- KÜLJEMENÜÜ (SIDEBAR) -->
     <nav class="sidebar">
         <div class="nav-group">Disain</div>
+
+        <div class="nav-item active" data-panel="home">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 6.5l5-4.5 5 4.5v6.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6.5z"/>
+                <path d="M6 14v-4h4v4"/>
+            </svg>
+            Avaleht
+        </div>
         
-        <div class="nav-item active" data-panel="colors">
+        <div class="nav-item" data-panel="colors">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="5" cy="5" r="2.5"/><circle cx="11" cy="5" r="2.5"/><circle cx="8" cy="11" r="2.5"/>
             </svg>
@@ -482,13 +484,43 @@
             Tekst pildil
         </div>
         
-        <!-- Lisa siia menüüpunkte juurde (Tekst fotol, Protsessiskeem jne) -->
+        <div class="nav-item" data-panel="processmap">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="3" cy="8" r="2"/><circle cx="13" cy="3" r="2"/><circle cx="13" cy="13" r="2"/>
+                <path d="M5 8h4M9 8L11 4.5M9 8L11 11.5"/>
+            </svg>
+            Protsessi kaart
+        </div>
     </nav>
 
-    <!-- PÕHISISU ALA -->
     <main class="content">
-        <!-- Paneel: Värvid (aktiivne laadimisel) -->
-        <div class="panel active" id="panel-colors">
+
+        <div class="panel active" id="panel-home">
+            <h1 class="panel-title">Tere tulemast!</h1>
+            
+            <section class="image-description">
+                <h2 class="section-label">Minu disainivalikud ja andmed</h2>
+                <p>
+                    Siin on minu Andmete visualiseerimine ja esitluse esimese koduse töö raames loodud CVI. Siin on näha minu valitud värvid, tüpograafia, graafikud ja protsessikaart. 
+                </p>
+                <p>
+                    Peamisteks värvideks valisin kaks endale meeldivat tooni ja hakkasin nendega testima, et kas üldse õnnestub neid omavahel kokku sobitada. Graafikute loomiseks kasutasin väljamõeldud andmeid Tartu busside ja inimeste liikumisharjumuste kohta. Protsessikaardi lõin aga koogi küpsetamisest.
+                </p>
+                <h2 class="section-label">WCAG testimise tulemused</h2>
+                <p>
+                    WCAG testimiseks oma veebilehel, kasutasin Google Chrome'i laiendust nimega "WCAG Contrast Checker" https://wcag-contrast-checker.com/welcome/. Selle abil testisin oma valitud värvide kontrastsust.
+                    Tulemustest nägin, et oleksin saanud valida paremate kontrastidega värvid, kuid kuna minu valitud värvid olid mulle endale meeldivad ja loetavad, otsustasin neid siiski kasutada. Tulevikus võiksin proovida leida sarnaseid toone, kuid parema kontrastsusega.
+                </p>
+                <figure class="image-draft">
+                <img src="kontrast.png" alt="Protsessiskeem">
+            </figure>
+                <p>Lisaks kasutasin ka teist WCAG testimise tööriista, et testida oma valitud värve värvipimeduse suhtes. Tulemustest nägin, et värvid läksid värvipimedusfiltritega väga sarnaseks ja tabelid muutusid peaaegu loetamatuteks.</p>
+                <figure class="image-draft">
+                <img src="varvipimedus.png" alt="Protsessiskeem">
+            </figure>
+                </section>
+        </div>
+        <div class="panel" id="panel-colors">
             <h1 class="panel-title">Värvid</h1>
 
             <section class="color-section">
@@ -496,20 +528,18 @@
                 <div class="color-card color-grid">
                     <div><div class="color-name">Põhitoon · oranž</div><div class="color-swatch dark-text" style="background:var(--primary);"><span>Primary</span><span class="color-hex">#E9822C</span></div></div>
                     <div><div class="color-name">Põhitoon · lilla</div><div class="color-swatch light-text" style="background:var(--secondary);"><span>Secondary</span><span class="color-hex">#502B9F</span></div></div>
-                    <div><div class="color-name">Hele taust</div><div class="color-swatch dark-text" style="background:var(--bg-light);"><span>Background light</span><span class="color-hex">#F8F9FA</span></div></div>
-                    <div><div class="color-name">Keskmine taust</div><div class="color-swatch dark-text" style="background:var(--bg-mid);"><span>Background mid</span><span class="color-hex">#EAECEF</span></div></div>
+                    <div><div class="color-name">Taustavärv</div><div class="color-swatch dark-text" style="background:var(--bg-light);"><span>Background light</span><span class="color-hex">#F8F9FA</span></div></div>
                     <div><div class="color-name">Põhitekst</div><div class="color-swatch light-text" style="background:var(--text-main);"><span>Text main</span><span class="color-hex">#212529</span></div></div>
-                    <div><div class="color-name">Abitekst</div><div class="color-swatch light-text" style="background:var(--text-muted);"><span>Text muted</span><span class="color-hex">#6C757D</span></div></div>
                 </div>
             </section>
 
             <section class="color-section">
                 <h2 class="section-label">Kategooriline palett</h2>
                 <div class="color-card color-grid">
-                    <div><div class="color-name">Kategooria 1</div><div class="color-swatch dark-text" style="background:var(--cat-3);"><span>Cat 1</span><span class="color-hex">#20C997</span></div></div>
-                    <div><div class="color-name">Kategooria 2</div><div class="color-swatch dark-text" style="background:var(--cat-4);"><span>Cat 2</span><span class="color-hex">#F4C145</span></div></div>
-                    <div><div class="color-name">Kategooria 3</div><div class="color-swatch light-text" style="background:var(--cat-5);"><span>Cat 3</span><span class="color-hex">#D63384</span></div></div>
-                    <div><div class="color-name">Kategooria 4</div><div class="color-swatch light-text" style="background:var(--cat-2);"><span>Cat 4</span><span class="color-hex">#502B9F</span></div></div>
+                    <div><div class="color-name">Kategooria 1</div><div class="color-swatch dark-text" style="background:var(--cat-2);"><span>Cat 1</span><span class="color-hex">#502B9F</span></div></div>
+                    <div><div class="color-name">Kategooria 2</div><div class="color-swatch dark-text" style="background:var(--cat-4);"><span>Cat 2</span><span class="color-hex">#737373</span></div></div>
+                    <div><div class="color-name">Kategooria 3</div><div class="color-swatch light-text" style="background:var(--cat-5);"><span>Cat 3</span><span class="color-hex">#8C52FF</span></div></div>
+                    <div><div class="color-name">Kategooria 4</div><div class="color-swatch light-text" style="background:var(--cat-3);"><span>Cat 4</span><span class="color-hex">#38B6FF</span></div></div>
                 </div>
             </section>
 
@@ -540,7 +570,6 @@
             </section>
         </div>
 
-        <!-- Paneel: Tüpograafia -->
         <div class="panel" id="panel-typography">
             <h1 class="panel-title">Tüpograafia</h1>
 
@@ -550,71 +579,75 @@
                     <div class="type-rows">
                         <div class="type-row">
                             <div class="type-role">Pealkiri 1</div>
-                            <div class="type-sample-h1">Kus andmed erinevad?</div>
-                            <div class="type-spec">Playfair Display · 600 · 32px</div>
+                            <div class="type-sample-h1">Minu pealkirjad on sellised</div>
+                            <div class="type-spec">Montserrat</div>
                         </div>
                         <div class="type-row">
                             <div class="type-role">Pealkiri 2</div>
-                            <div class="type-sample-h2">Haiguste levimus vanuse järgi</div>
-                            <div class="type-spec">Playfair Display · 600 · 24px</div>
+                            <div class="type-sample-h2">Pisult väiksemad ja vähem olulisemad läksid selliseks</div>
+                            <div class="type-spec">Montserrat</div>
                         </div>
                         <div class="type-row">
                             <div class="type-role">Sisutekst</div>
-                            <div class="type-sample-body">Graafik näitab, kuidas väärtused vanuserühmade lõikes muutuvad. Heledamad toonid tähistavad väiksemaid väärtusi.</div>
-                            <div class="type-spec">Playfair Display · 400 · 16px</div>
+                            <div class="type-sample-body">See on minu sisuteksti näidis. Siin saab kirjutada rohkem infot.</div>
+                            <div class="type-spec">Montserrat</div>
                         </div>
                         <div class="type-row">
                             <div class="type-role">Graafiku pealkiri</div>
-                            <div class="type-sample-chart-title">Haiguste levimussuhe vanuserühma järgi</div>
-                            <div class="type-spec">Playfair Display · 600 · 18px</div>
+                            <div class="type-sample-chart-title">Graafiku pealkirjad panin boldi</div>
+                            <div class="type-spec">Montserrat</div>
                         </div>
                         <div class="type-row">
                             <div class="type-role">Alapealkiri</div>
-                            <div class="type-sample-subtitle">Keskmine väärtus · võrdlus rühmade vahel</div>
-                            <div class="type-spec">Playfair Display · 400 · 14px</div>
+                            <div class="type-sample-subtitle">Alapealkirjad said sellised</div>
+                            <div class="type-spec">Montserrat</div>
                         </div>
                         <div class="type-row">
                             <div class="type-role">Teljemärgised</div>
                             <div class="type-sample-axis">
-                                <div class="type-sample-axis-label">Väärtus</div>
+                                <div class="type-sample-axis-label">Väärtused telgedel</div>
                                 <div class="type-sample-axis-ticks">0 · 25 · 50 · 75 · 100</div>
                             </div>
-                            <div class="type-spec">Sans 13px · Mono 12px</div>
+                            <div class="type-spec">Sans</div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- Paneel: Tekst pildil -->
         <div class="panel" id="panel-textonimage">
             <h1 class="panel-title">Tekst pildil</h1>
             <figure class="image-draft">
-                <img src="buss_mustand.png" alt="Bussi ja teksti kujunduse mustand">
+                <img src="tekst_pildil.png" alt="Bussi ja teksti kujunduse mustand">
             </figure>
             <section class="image-description">
                 <h2 class="section-label">Minu kujundusvalik</h2>
                 <p>Valisin selle toreda pildi Tartu linnaliini bussist ja kuna meenus, et hiljuti oli autovaba päev, tundus see pilt siia sobivat. Lisaks oli pildil ka vaba ruumi kuhu teksti paigutada. Teksti püüdsin paigutada nii, et see jäeks võimalikult loetav. Soovisin kasutada pildil oma CVI põhivärve, kui alumine oranz tekst ei tahtnud kuidagi nähtav jääda.
-                    Seega kasutasin oranzi värvi heledamat tooni, et tekst oleks paremini nähtav (#fdf3ea). Peamisel tekstil kasutasin oma CVI põhivärvi, lillat (#502b9f). Teksti fontiks jäi Playfair Display.
+                    Seega kasutasin oranzi värvi heledamat tooni (#fdf3ea) ja tegin pilti tumedamaks, et tekst oleks paremini nähtav. Peamisel tekstil kasutasin oma CVI põhivärvi, lillat (#502b9f). Teksti fontiks jäi Montserrat.
                 </p>
             </section>
         </div>
 
-        <!-- Paneel: Graafikud -->
         <div class="panel" id="panel-charts">
             <h1 class="panel-title">Andmegraafikud</h1>
             <figure class="image-draft">
                 <img src="Graafik1.png" alt="Andmegraafiku näidis">
             </figure>
-            <figure class="image-draft">
+            <figure class="image-draft" style="margin-top: 20px;">
                 <img src="graafik2.png" alt="Teise andmegraafiku näidis">
             </figure>
         </div>
         
-        <!-- Lisa siia sisuplokke juurde vastavalt menüüle -->
+        <div class="panel" id="panel-processmap">
+            <h1 class="panel-title">Protsessi kaart</h1>
+            
+            <figure class="image-draft img-large">
+                <img src="protsessi_kaart.png" alt="Protsessiskeem">
+            </figure>
+
+        </div>
     </main>
 
-    <!-- JAVASCRIPT MENÜÜ TÖÖTAMISEKS -->
     <script>
         const items = document.querySelectorAll('.nav-item[data-panel]');
         const panels = document.querySelectorAll('.panel');
